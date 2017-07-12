@@ -14,6 +14,8 @@ tags
 
 <h1> Lista de tags existentes </h1>
 
+<p> En total tenemos {{count($tags)}} tags </p>
+
 <table>
 <tr>
 <td> tag </td>

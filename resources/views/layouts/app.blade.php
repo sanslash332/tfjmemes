@@ -84,6 +84,19 @@ Crear nuevo meme
         @yield('content')
     </div>
 
+<div id="foother" >
+
+<footer>
+
+<p>  Disclaimer: tiflojuegos tan s&oacute;lo recopila, almacena y administra las estupideces que se guardan aqu&iacute;. Tiflojuegos no se hace responsable del contenido mostrado aqu&iacute;, y si hiere u ofende a alguien. cada frace, meme, u contenido es responsavilidad exclusiva y tan solo de sus emisores. Tiflojuegos se guarda el derecho de editar, borrar o agregar memes en cualquier momento </p>
+<br />
+
+<p> Copiright (c) <a href="http://www.tiflojuegos.com"> Tiflojuegos.com </a> 2015-2017. Todos los derechos recerbados. </p>
+
+</footer>
+
+</div>
+
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
 </body>

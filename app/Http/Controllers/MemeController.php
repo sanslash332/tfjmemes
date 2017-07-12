@@ -137,6 +137,21 @@ return redirect('/home');
     public function edit(Meme $meme)
     {
         //
+
+$newform = $this->form(\App\Http\Forms\NewMemeForm::class, [
+        'url' => route('meme.update', $meme),
+        'method' => 'PUT',
+        'edit'=> true,
+        'model' => $meme,
+        'meme' => $meme,
+
+
+]);
+
+
+return view('meme.edit', compact(['newform']));
+
+
     }
 
     /**
@@ -149,6 +164,71 @@ return redirect('/home');
     public function update(Request $request, Meme $meme)
     {
         //
+
+$form = $this->form(\App\Http\Forms\NewMemeForm::class);
+if(!$form->isValid())
+{
+return redirect()->back()->withErrors($form->getErrors())->withInput(); 
+}
+
+
+$meme->content = $request->content;
+$meme->save();
+
+$meme->tags()->detach();
+$meme->autors()->detach();
+
+$tags = explode(',', trim($request->tags));
+$autors = explode(',', trim($request->autors));
+foreach($tags as $t)
+{
+$ts = Tag::where('title', $t)->get();
+if(count($ts)>0)
+{
+$meme->tags()->attach($ts[0]->id);
+}
+else
+{
+$tag = new Tag();
+$tag->title= $t;
+$tag->save();
+$meme->tags()->attach($tag->id);
+
+
+}
+}
+
+foreach($autors as $a)
+{
+$as = Autor::where('name', $a)->get();
+if(count($as)>0)
+{
+$meme->autors()->attach($as[0]->id);
+
+}
+else
+{
+$autor = new Autor();
+$autor->name=$a;
+$autor->save();
+$meme->autors()->attach($autor->id);
+
+
+}
+
+}
+
+$meme->save();
+
+Tag::checkCeros();
+Autor::checkCeros();
+
+return redirect('/home');
+
+
+
+
+
     }
 
     /**
@@ -160,5 +240,16 @@ return redirect('/home');
     public function destroy(Meme $meme)
     {
         //
+$meme->autors()->detach();
+$meme->tags()->detach();
+$meme->delete();			
+Tag::checkCeros();
+Autor::checkCeros();
+return redirect('/home');
+
+
+
+
+
     }
 }

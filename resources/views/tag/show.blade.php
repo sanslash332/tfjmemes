@@ -14,31 +14,7 @@ tag: {{$tag->title}}
 
 <h1> Memes en el tag {{$tag->title}} </h1>
 
-@forelse($tag->memes as $meme)
-<article>
-<div id="meme_autors">
-
-<p> Dicho por: @foreach($meme->autors as $a)
-<a href="{!! route("autor.show", $a->id)!!}"> {{$a->name}} </a>
-@endforeach
-</p>
-</div>
-
-<p> {{$meme->content}} </p>
-
-<div id="meme_tags">
-<p> tags: @foreach($meme->tags as $t)
-<a href="{!! route("tag.show", $t->id) !!}">{{$t->title}} </a>
-@endforeach
-</p>
-</div>
-</article>
-
-<hr />
-
-@empty
-<p> no ha dicho ningún meme: </p>
-@endforelse
+@each('meme.meme', $tag->memes, 'meme', 'meme.empty')
 
 
             </div>

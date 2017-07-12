@@ -20,5 +20,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('meme', 'MemeController');
+
+
 Route::resource('tag', 'TagController');
 Route::resource('autor', 'AutorController');

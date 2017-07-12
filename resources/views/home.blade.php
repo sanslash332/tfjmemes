@@ -11,25 +11,8 @@
                 </div>
 
 <h1> el meme aleatorio </h1>
+            @each('meme.meme', [$randommeme],'meme', 'meme.empty')
 
-@if(isset($randommeme->autors))
-<div id="meme_autors">
-<p> Dicho por: @foreach($randommeme->autors as $autor)
-<a href="{!! route("autor.show", $autor->id)!!}"> {{$autor->name}} </a>
-@endforeach
-</p>
-</div>
-@endif
-<p> {{$randommeme->content}}</p>
-@if(isset($randommeme->tags))
-<div id="meme_tags">
-<p> tags: @foreach($randommeme->tags as $tag)
-<a href="{!! route("tag.show", $tag->id) !!}">{{$tag->title}} </a>
-@endforeach
-</p>
-</div>
-
-@endif
             </div>
         </div>
     </div>

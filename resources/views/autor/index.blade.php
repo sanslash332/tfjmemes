@@ -14,6 +14,7 @@ autores
 
 <h1> lista de autores </h1>
 
+<p> En total hay {{count($autors)}} autores registrados </p> 
 <table>
 <tr>
 <td> autor</td>

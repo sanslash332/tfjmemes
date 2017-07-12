@@ -12,4 +12,10 @@ public function memes()
 {
 return($this->belongsToMany('App\Meme'));
 }
+
+public static function checkCeros()
+{
+$ceros = Tag::doesntHave('memes')->delete();
+
+}
 }

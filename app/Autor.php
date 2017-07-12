@@ -13,4 +13,10 @@ public function memes()
 return($this->belongsToMany('App\Meme'));
 
 }
+
+public static function checkCeros()
+{
+$ceros = Autor::doesntHave('memes')->delete();
+
+}
 }
