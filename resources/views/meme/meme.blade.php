@@ -38,8 +38,8 @@ document.getElementById('delete{{$meme->id}}-form').submit();
 @endforeach
 </p>
 
-< br/>
-<p> ¿te gustó? <a href="{{route('meme.show', $meme)}}"> ¡ll&eacute;vatelo solito! </a> </p>
+<br />
+<p> te gust&oacute;? <a href="{{route('meme.show', $meme)}}"> ¡ll&eacute;vatelo solito! </a> </p>
 
 </div>
 
