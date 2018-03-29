@@ -4,9 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Tag;
 use Illuminate\Http\Request;
+use Kris\LaravelFormBuilder\FormBuilderTrait;
+use Kris\LaravelFormBuilder\FormBuilder;
+
+use auth;
 
 class TagController extends Controller
 {
+
+public function __construct()
+{
+$this->middleware('auth', ['except' => ['index','show']]);
+}
     /**
      * Display a listing of the resource.
      *

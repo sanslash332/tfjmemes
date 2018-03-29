@@ -18,7 +18,7 @@ use FormBuilderTrait;
 
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth', ['except' => ['show']]);
     }
 
  
@@ -126,6 +126,7 @@ return redirect('/home');
     public function show(Meme $meme)
     {
         //
+return view('meme.show', compact(['meme']));
     }
 
     /**
@@ -223,7 +224,8 @@ $meme->save();
 Tag::checkCeros();
 Autor::checkCeros();
 
-return redirect('/home');
+return redirect(route('meme.show',
+$meme));
 
 
 

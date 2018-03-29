@@ -14,6 +14,26 @@ autor: {{$autor->name}}
 
 <h1> Memes dichos por {{$autor->name}} </h1>
 
+@if(auth::check())
+<button data-toggle="collapse" data-target="#formEditAutor">Editar nombre </button>
+
+<div class="formContent collapse" id="formEditAutor">
+
+<div class="formerrors" id="newuserserrors">
+@if(count($errors)>0)
+<ul>
+@foreach($errors->all() as $error)
+<li> {{$error}} </li>
+@endforeach
+</ul>
+@endif
+</div>
+
+{!! form($editform) !!}
+
+</div>
+@endif
+
 @each('meme.meme', $autor->memes, 'meme', 'meme.empty')
 
 

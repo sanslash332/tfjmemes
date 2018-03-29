@@ -5,8 +5,21 @@ namespace App\Http\Controllers;
 use App\Autor;
 use Illuminate\Http\Request;
 
+use Kris\LaravelFormBuilder\FormBuilderTrait;
+use Kris\LaravelFormBuilder\FormBuilder;
+use auth;
+
+
+
 class AutorController extends Controller
 {
+use FormBuilderTrait;
+
+public function __construct()
+{
+$this->middleware('auth', ['except' => ['index','show']]);
+}
+
     /**
      * Display a listing of the resource.
      *
@@ -49,7 +62,20 @@ return view('autor.index', compact(['autors']));
      */
     public function show(Autor $autor)
     {
-        return view('autor.show', compact(['autor']));
+$editform = $this->form(\App\Http\Forms\EditAutorForm::class, [
+        'url' => route('autor.update', $autor),
+        'method' => 'PUT',
+        'edit'=> true,
+        'model' => $autor,
+        'autor' => $autor,
+
+
+]);
+
+
+
+
+        return view('autor.show', compact(['autor','editform']));
     }
 
     /**
@@ -73,6 +99,22 @@ return view('autor.index', compact(['autors']));
     public function update(Request $request, Autor $autor)
     {
         //
+$form = $this->form(\App\Http\Forms\EditAutorForm::class);
+if(!$form->isValid())
+{
+return redirect()->back()->withErrors($form->getErrors())->withInput();
+
+
+}
+
+$autor->name=$request->name;
+$autor->save();
+return redirect(route('autor.show',$autor));
+
+
+
+
+
     }
 
     /**

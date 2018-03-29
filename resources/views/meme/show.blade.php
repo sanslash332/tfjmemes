@@ -1,3 +1,10 @@
+@extends('layouts.app')
+@section('title')
+meme: {{$meme->id}}
+@endsection
+@section('content')
+<div class="container">
+
 <article>
 @if(isset($meme->autors))
 <div id="meme_autors">
@@ -28,21 +35,16 @@ document.getElementById('delete{{$meme->id}}-form').submit();
 </div>
 @endif
 
-<p> {!! nl2br($meme->content) !!}</p>
-<br />
-
+ <p> {!! nl2br($meme->content) !!} </p>
 @if(isset($meme->tags))
 <div id="meme_tags">
 <p> tags: @foreach($meme->tags as $tag)
 <a href="{!! route("tag.show", $tag->id) !!}">{{$tag->title}} </a>
 @endforeach
 </p>
-
-< br/>
-<p> ¿te gustó? <a href="{{route('meme.show', $meme)}}"> ¡ll&eacute;vatelo solito! </a> </p>
-
 </div>
 
 @endif
 </article>
-<hr />
+</div>
+@endsection
